@@ -90,29 +90,34 @@ Then, add control flow within your function such that IF creditScore is above 74
 is anywhere between 660 and 740 interest rate doesn't change.
 */
 
-// function mortgageCalculator(Prin, Rate, Year, CredScore) {
-//   if (CredScore > 740) {
-//     Rate -= 0.005;
-//   } else if (CredScore < 660) {
-//     Rate += 0.005;
-//   } else if ((CredScore = "")) {
-//   }
+function mortgageCalculator(Prin, Rate, Year, CredScore) {
+  if (CredScore > 740) {
+    Rate -= 0.005;
+  } else if (CredScore < 660) {
+    Rate += 0.005;
+  }
 
-//   let name = "Lenny";
-//   let monthlyInterestRate = Rate / 12;
-//   let periods = Year * 12;
+  let name = "Lenny";
+  let monthlyInterestRate = Rate / 12;
+  let periods = Year * 12;
 
-//   const numerator =
-//     monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods);
+  const numerator =
+    monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods);
 
-//   const denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
+  const denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
 
-//   const answer = Prin * (numerator / denominator);
+  const answer = Prin * (numerator / denominator);
 
-//   const rounded = Math.round(100 * answer) / 100;
+  const rounded = Math.round(100 * answer) / 100;
 
-//   return name + ", your monthly rate is " + rounded;
-// }
+  return (
+    name +
+    ", with an interest rate of " +
+    Rate +
+    " your monthly rate is " +
+    rounded
+  );
+}
 
 // console.log(mortgageCalculator(200000, 0.05, 30, 740));
 
@@ -134,29 +139,11 @@ For example, variableInterestRate(200000, 0.04, 30) should console.log:
 "{Name}, with an interest rate of 0.055, your monthly rate is $1136"
 "{Name}, with an interest rate of 0.06, your monthly rate is $1199"
 */
-function variableInterestRate(Prin, Rate, Year) {
-  let interest = Rate - 0.005 * 4;
-
+function variableInterestRate(Prin, Rate, Year, CredScore) {
+  let newRate = Rate - 0.02;
   for (let i = 0; i < 9; i++) {
-    let name = "Lenny";
-    let monthlyInterestRate = interest / 12;
-    let periods = Year * 12;
-
-    const numerator =
-      monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods);
-
-    const denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
-
-    const answer = Prin * (numerator / denominator);
-
-    const rounded = Math.round(100 * answer) / 100;
-
-    console.log(
-      `${name}, with an interest rate of ${interest}, your monthly rate is $${Math.round(
-        rounded
-      )}`
-    );
-    interest = Math.round((interest + 0.005) * 1000) / 1000;
+    console.log(mortgageCalculator(Prin, newRate, Year, CredScore));
+    newRate = Math.round((newRate + 0.005) * 1000) / 1000;
   }
 }
-console.log(variableInterestRate(200000, 0.04, 30));
+variableInterestRate(200000, 0.04, 30, 700);
