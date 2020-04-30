@@ -92,37 +92,41 @@ Then, add control flow within your function such that IF creditScore is above 74
 is anywhere between 660 and 740 interest rate doesn't change.
 */
 
-function mortgageCalculator(Prin, Rate, Year, CredScore) {
-  let P = Prin;
-  let I = Rate;
-  let N = Year;
-  let name = "Lenny";
-  let monthlyInterestRate = I / 12;
-  let periods = N * 12;
+// function mortgageCalculator(Prin, Rate, Year, CredScore) {
+//   let P = Prin;
+//   let I = Rate;
+//   let N = Year;
 
-  const numerator =
-    monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods);
-  const denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
+//   if (CredScore > 740) {
+//     I -= 0.005;
+//   } else if (CredScore < 660) {
+//     I += 0.005;
+//   } else if ((CredScore = "")) {
+//   }
 
-  const answer = P * (numerator / denominator);
+//   let name = "Lenny";
+//   let monthlyInterestRate = I / 12;
+//   let periods = N * 12;
 
-  const rounded = Math.round(100 * answer) / 100;
+//   const numerator =
+//     monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods);
 
-  if (CredScore > 740) {
-    monthlyInterestRate = monthlyInterestRate + 0.5;
-    console.log(name + ", your monthly rate is " + rounded);
-  } else if (CredScore < 660) {
-    monthlyInterestRate = monthlyInterestRate - 0.5;
-    console.log(name + ", your monthly rate is " + rounded);
-  } else {
-    console.log(name + ", your monthly rate is " + rounded);
-  }
-}
+//   const denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
 
-mortgageCalculator(200000, 0.05, 30, 800);
+//   const answer = P * (numerator / denominator);
+
+//   const rounded = Math.round(100 * answer) / 100;
+
+//   return name + ", your monthly rate is " + rounded;
+// }
+
+// console.log(mortgageCalculator(200000, 0.05, 30));
 
 // 🏡 Task 6: Loops
-/* Write a new function called variableInterestRate. This function should be the same as mortgageCalculator, except it should console.log the monthly payment for 10 different interest rates at 0.5% increments plus or minus 2% from the inputted interest rate. Complete these calculations using a for loop.
+/* Write a new function called variableInterestRate. This function should be the same as 
+mortgageCalculator, except it should console.log the monthly payment for 10 different 
+interest rates at 0.5% increments plus or minus 2% from the inputted interest rate. 
+Complete these calculations using a for loop.
 
 For example, variableInterestRate(200000, 0.04, 30) should console.log:
 
@@ -136,15 +140,32 @@ For example, variableInterestRate(200000, 0.04, 30) should console.log:
 "{Name}, with an interest rate of 0.055, your monthly rate is $1136"
 "{Name}, with an interest rate of 0.06, your monthly rate is $1199"
 */
+function variableInterestRate(Prin, Rate, Year, CredScore) {
+  let P = Prin;
+  let I = Rate;
+  let N = Year;
 
-// 🌟🌟🌟 STRETCH 🌟🌟🌟//
+  for (let i = 0; i < 10; i++) {
+    if (CredScore > 740) {
+      I -= 0.005;
+    } else if (CredScore < 660) {
+      I += 0.005;
+    }
 
-/* Attempt any of the stretch goals below once you have finished the work above. Remember as always, these may require additional research beyond what you learned today */
+    let name = "Lenny";
+    let monthlyInterestRate = I / 12;
+    let periods = N * 12;
 
-/*  🏡 Add  `Property Tax`, `Homeowner's insurance` and `HOA fees` as parameters in your function to calculate total monthly spending on housing */
+    const numerator =
+      monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods);
 
-/* 🏡 Build a calculator function that accepts `monthly payment` and `interest rate` and returns the maximum loan that a person could afford */
+    const denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
 
-/* 🏡 Explore using `window.prompt()` to allow a user to input parameters in the browser */
+    const answer = P * (numerator / denominator);
 
-/* 🏡  Refactor your `variableInterestRate()` function to accept an array of interest rates (make sure to copy and paste as to not lose your work!) */
+    const rounded = Math.round(100 * answer) / 100;
+
+    console.log(name + ", your monthly rate is " + rounded);
+  }
+}
+console.log(variableInterestRate(200000, 0.05, 30));
