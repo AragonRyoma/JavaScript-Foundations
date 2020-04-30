@@ -4,13 +4,13 @@
 /* Create variables for principal, interest rate, and years. Assign them the values 200000, 0.05, and 30 respectively. Create another value called name and give it the value of your own name.
  */
 
-// let P = 200000;
+let P = 200000;
 
-// let I = 0.05;
+let I = 0.05;
 
-// let N = 30;
+let N = 30;
 
-// let name = "Lenny";
+let name = "Lenny";
 
 // 🏡 Task 1.5: Simple Math
 /* To create a monthly mortgage rate calculator, we need to know the number of years in months and the monthly interest rate. 
@@ -20,9 +20,9 @@ Create a variable called `monthlyInterestRate` and give it the value of interest
 Create another variable called `periods` and give it the value of years*12.
 */
 
-// let monthlyInterestRate = I / 12;
+let monthlyInterestRate = I / 12;
 
-// let periods = N * 12;
+let periods = N * 12;
 
 // 🏡 Task 2: Harder Math
 /* Create your calculator! Use the formula in the ReadMe to run calculations on your numbers. Save the final value into a variable called monthlyRate.
@@ -34,15 +34,16 @@ Hint #2: you'll need to use the `math` object for parts of this calculation!
 When your math is correct, monthlyRate will equal 1073.64
 */
 
-// const numerator = monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods);
+const numerator =
+  monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods);
 
-// const denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
+const denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
 
-// const answer = P * (numerator / denominator);
+const answer = P * (numerator / denominator);
 
-// const rounded = Math.round(100 * answer) / 100;
+const rounded = Math.round(100 * answer) / 100;
 
-// console.log(rounded);
+console.log(rounded);
 
 // 🏡 Task 3: Function
 /* Create a function called `mortgageCalculator` that combines all of the steps from task 1 and 2 and returns a sentence "{Name}, 
@@ -65,18 +66,15 @@ mortgageCalculator(2000000, 0.05, 30); <-- should return 1,073.64
 */
 
 // function mortgageCalculator(Prin, Rate, Year) {
-//   let P = Prin;
-//   let I = Rate;
-//   let N = Year;
 //   let name = "Lenny";
-//   let monthlyInterestRate = I / 12;
-//   let periods = N * 12;
+//   let monthlyInterestRate = Rate / 12;
+//   let periods = Year * 12;
 
 //   const numerator =
 //     monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods);
 //   const denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
 
-//   const answer = P * (numerator / denominator);
+//   const answer = Prin * (numerator / denominator);
 
 //   const rounded = Math.round(100 * answer) / 100;
 
@@ -93,34 +91,30 @@ is anywhere between 660 and 740 interest rate doesn't change.
 */
 
 // function mortgageCalculator(Prin, Rate, Year, CredScore) {
-//   let P = Prin;
-//   let I = Rate;
-//   let N = Year;
-
 //   if (CredScore > 740) {
-//     I -= 0.005;
+//     Rate -= 0.005;
 //   } else if (CredScore < 660) {
-//     I += 0.005;
+//     Rate += 0.005;
 //   } else if ((CredScore = "")) {
 //   }
 
 //   let name = "Lenny";
-//   let monthlyInterestRate = I / 12;
-//   let periods = N * 12;
+//   let monthlyInterestRate = Rate / 12;
+//   let periods = Year * 12;
 
 //   const numerator =
 //     monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods);
 
 //   const denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
 
-//   const answer = P * (numerator / denominator);
+//   const answer = Prin * (numerator / denominator);
 
 //   const rounded = Math.round(100 * answer) / 100;
 
 //   return name + ", your monthly rate is " + rounded;
 // }
 
-// console.log(mortgageCalculator(200000, 0.05, 30));
+// console.log(mortgageCalculator(200000, 0.05, 30, 740));
 
 // 🏡 Task 6: Loops
 /* Write a new function called variableInterestRate. This function should be the same as 
@@ -140,32 +134,29 @@ For example, variableInterestRate(200000, 0.04, 30) should console.log:
 "{Name}, with an interest rate of 0.055, your monthly rate is $1136"
 "{Name}, with an interest rate of 0.06, your monthly rate is $1199"
 */
-function variableInterestRate(Prin, Rate, Year, CredScore) {
-  let P = Prin;
-  let I = Rate;
-  let N = Year;
+function variableInterestRate(Prin, Rate, Year) {
+  let interest = Rate - 0.005 * 4;
 
-  for (let i = 0; i < 10; i++) {
-    if (CredScore > 740) {
-      I -= 0.005;
-    } else if (CredScore < 660) {
-      I += 0.005;
-    }
-
+  for (let i = 0; i < 9; i++) {
     let name = "Lenny";
-    let monthlyInterestRate = I / 12;
-    let periods = N * 12;
+    let monthlyInterestRate = interest / 12;
+    let periods = Year * 12;
 
     const numerator =
       monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods);
 
     const denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
 
-    const answer = P * (numerator / denominator);
+    const answer = Prin * (numerator / denominator);
 
     const rounded = Math.round(100 * answer) / 100;
 
-    console.log(name + ", your monthly rate is " + rounded);
+    console.log(
+      `${name}, with an interest rate of ${interest}, your monthly rate is $${Math.round(
+        rounded
+      )}`
+    );
+    interest = Math.round((interest + 0.005) * 1000) / 1000;
   }
 }
-console.log(variableInterestRate(200000, 0.05, 30));
+console.log(variableInterestRate(200000, 0.04, 30));
